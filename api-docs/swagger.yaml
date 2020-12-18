@@ -1,13 +1,16 @@
 swagger: '2.0'
 info:
-  description: Api Documentation
+  description: Information related to api exposed by teammacc system.
   version: '1.0'
-  title: Api Documentation
-  termsOfService: 'urn:tos'
-  contact: {}
+  title: Stock API
+  termsOfService: 'https://www.teammacc.com/termsandconditions'
+  contact:
+    name: Team MACC
+    url: 'http://www.teammacc.com'
+    email: support@teammacc.com
   license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+    name: License of API
+    url: 'https://www.teammacc.com/privacypolicy'
 host: 'localhost:8080'
 basePath: /
 tags:
@@ -18,9 +21,7 @@ paths:
     put:
       tags:
         - stock-controller
-      summary: >-
-        Acrescenta mais a quantidade informada para o estoque do produto
-        informado
+      summary: Acrescenta mais a quantidade informada para o estoque do produto informado
       operationId: acrescentarUsingPUT
       consumes:
         - application/json
@@ -29,27 +30,25 @@ paths:
       parameters:
         - name: idProduto
           in: path
-          description: idProduto
+          description: Número do ID do produto que se deseja acrescentar estoque
           required: true
           type: integer
           format: int64
         - name: quantidade
           in: path
-          description: quantidade
+          description: Quantidade do estoque que se deseja acrescentar
           required: true
           type: integer
           format: int32
       responses:
         '200':
-          description: >-
-            Indica que o estoque do porduto especificado agora é tem mais a
-            igual a quantidade especificada
+          description: Indica que o estoque do porduto especificado foi acrescido da quantidade especificada
           schema:
             $ref: '#/definitions/StockVO'
         '201':
           description: Created
         '400':
-          description: No records found for this ID
+          description: Nenhum registro encotrado para o ID especificado
         '401':
           description: Unauthorized
         '403':
@@ -62,9 +61,7 @@ paths:
     put:
       tags:
         - stock-controller
-      summary: >-
-        Salva um novo estoque no valor da quantidade informada para o produto
-        informado
+      summary: Salva um novo estoque no valor da quantidade informada para o produto informado
       operationId: cadastrarUsingPUT
       consumes:
         - application/json
@@ -73,27 +70,25 @@ paths:
       parameters:
         - name: idProduto
           in: path
-          description: idProduto
+          description: Número do ID do produto que se deseja cadastrar estoque
           required: true
           type: integer
           format: int64
         - name: quantidade
           in: path
-          description: quantidade
+          description: Quantidade do estoque que se deseja cadastrar
           required: true
           type: integer
           format: int32
       responses:
         '200':
-          description: >-
-            Indica que o estoque do porduto especificado agora é igual a
-            quantidade especificada
+          description: Indica que o estoque do porduto especificado foi atualizado para a quantidade especificada
           schema:
             $ref: '#/definitions/StockVO'
         '201':
           description: Created
         '400':
-          description: No records found for this ID
+          description: Nenhum registro encotrado para o ID especificado
         '401':
           description: Unauthorized
         '403':
@@ -106,7 +101,7 @@ paths:
     put:
       tags:
         - stock-controller
-      summary: Reduiz o estoque do produto informado na quantidade informada
+      summary: Reduz o estoque do produto informado na quantidade informada
       operationId: baixarUsingPUT
       consumes:
         - application/json
@@ -115,27 +110,25 @@ paths:
       parameters:
         - name: idProduto
           in: path
-          description: idProduto
+          description: Número do ID do produto que se deseja baixar o estoque
           required: true
           type: integer
           format: int64
         - name: quantidade
           in: path
-          description: quantidade
+          description: Quantidade do estoque que se deseja baixar
           required: true
           type: integer
           format: int32
       responses:
         '200':
-          description: >-
-            Indica que o estoque do porduto especificado foi baixado da
-            quantidade especificada
+          description: Indica que o estoque do porduto especificado foi baixado da quantidade especificada
           schema:
             $ref: '#/definitions/StockVO'
         '201':
           description: Created
         '400':
-          description: No records found for this ID
+          description: Nenhum registro encotrado para o ID especificado
         '401':
           description: Unauthorized
         '403':
@@ -149,7 +142,7 @@ paths:
       tags:
         - stock-controller
       summary: Retorna a entidade especificada pelo ID do produto
-      operationId: consultarUsingGET
+      operationId: findByIdProdutoUsingGET
       produces:
         - application/json
         - application/x-yaml
@@ -157,7 +150,7 @@ paths:
       parameters:
         - name: idProduto
           in: path
-          description: idProduto
+          description: Número do ID do produto que se deseja recuperar
           required: true
           type: integer
           format: int64
@@ -167,7 +160,7 @@ paths:
           schema:
             $ref: '#/definitions/StockVO'
         '400':
-          description: No records found for this ID
+          description: Nenhum registro encotrado para o ID especificado
         '401':
           description: Unauthorized
         '403':
@@ -180,34 +173,30 @@ paths:
     get:
       tags:
         - stock-controller
-      summary: >-
-        Verifica se o produto informado possui em estoque, pelo menos, a
-        quantidade informada
+      summary: 'Verifica se o produto informado possui em estoque, pelo menos, a quantidade informada'
       operationId: verificarUsingGET
       produces:
         - '*/*'
       parameters:
         - name: idProduto
           in: path
-          description: idProduto
+          description: Número do ID do produto que se deseja verificar estoque
           required: true
           type: integer
           format: int64
         - name: quantidade
           in: path
-          description: quantidade
+          description: Quantidade do estoque que se deseja verificar a existência
           required: true
           type: integer
           format: int32
       responses:
         '200':
-          description: >-
-            true - Indica que o estoque do porduto especificado possui a
-            quantidade especificada
+          description: true - Indica que o estoque do porduto especificado possui a quantidade especificada
           schema:
             type: boolean
         '400':
-          description: No records found for this ID
+          description: Nenhum registro encotrado para o ID especificado
         '401':
           description: Unauthorized
         '403':
@@ -229,7 +218,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: id
+          description: Número do ID do estoque que se deseja recuperar
           required: true
           type: integer
           format: int64
@@ -239,7 +228,7 @@ paths:
           schema:
             $ref: '#/definitions/StockVO'
         '400':
-          description: No records found for this ID
+          description: Nenhum registro encotrado para o ID especificado
         '401':
           description: Unauthorized
         '403':
@@ -249,17 +238,9 @@ paths:
         '500':
           description: Foi gerada uma exceção no servidor
 definitions:
-  Links:
-    type: object
-    properties:
-      empty:
-        type: boolean
-    title: Links
   StockVO:
     type: object
     properties:
-      _links:
-        $ref: '#/definitions/Links'
       id:
         type: integer
         format: int64
