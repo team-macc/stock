@@ -1,0 +1,38 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: stock
+  labels:
+    app: stock
+spec:
+  selector:
+    app: stock
+  ports:
+    - port: 8080
+      name: http
+  type: NodePort
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: stock
+spec:
+  selector:
+    matchLabels:
+      app: stock
+  replicas: 1
+  template:
+    metadata:
+      annotations: 
+        sidecar.istio.io/inject: "true"      
+      labels:
+        app: stock
+        version: v1
+    spec:
+      containers:
+      - name: stock
+        image: samuelpereiradesouza/stock:5
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
+---

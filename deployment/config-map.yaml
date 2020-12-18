@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: stock
+data:
+  application.yaml: |-
+    datasource:
+      url: jdbc:postgresql://stock-db-postgresql/stock?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC
+      password: FnaKohL7ib
+      username: postgres
