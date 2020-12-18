@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.teammacc.stock.entity.Stock;
 import lombok.*;
 import org.modelmapper.ModelMapper;
-import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 
@@ -16,7 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class StockVO extends RepresentationModel<StockVO> implements Serializable{
+public class StockVO implements Serializable{
 
 	private static final long serialVersionUID = 5098670473577699777L;
 	

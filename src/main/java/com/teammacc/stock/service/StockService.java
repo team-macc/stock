@@ -21,7 +21,7 @@ public class StockService {
     public StockVO findById(Long id) {
 
         var entity = stockRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encotrado para o ID especificado"));
 
         return StockVO.create(entity);
     }
@@ -32,13 +32,13 @@ public class StockService {
 
     public StockVO findByIdProduto(Long idProduto) {
         var entity = stockRepository.findByIdProduto(idProduto)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encotrado para o ID especificado"));
         return StockVO.create(entity);
     }
 
     public StockVO baixar(Long idProduto, Integer quantidade) {
         var entity = stockRepository.findByIdProduto(idProduto)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encotrado para o ID especificado"));
         verificarEstoque(entity, quantidade);
         var quantidadeProduto = entity.getQuantidadeProduto();
         if (quantidadeProduto == 0) {
@@ -51,7 +51,7 @@ public class StockService {
 
     public StockVO atualizar(Long idProduto, Integer quantidade) {
         var entity = stockRepository.findByIdProduto(idProduto)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encotrado para o ID especificado"));
         entity.setQuantidadeProduto(quantidade);
         stockRepository.save(entity);
         return StockVO.create(entity);
@@ -59,7 +59,7 @@ public class StockService {
 
     public StockVO acrescentar(Long idProduto, Integer quantidade) {
         var entity = stockRepository.findByIdProduto(idProduto)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encotrado para o ID especificado"));
         var quantidadeProduto = entity.getQuantidadeProduto();
         entity.setQuantidadeProduto(quantidade + quantidadeProduto);
         stockRepository.save(entity);
@@ -68,7 +68,7 @@ public class StockService {
 
     public Boolean verificar(Long idProduto, Integer quantidade) {
         var entity = stockRepository.findByIdProduto(idProduto)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encotrado para o ID especificado"));
         verificarEstoque(entity, quantidade);
         return true;
     }
@@ -76,7 +76,7 @@ public class StockService {
     private void verificarEstoque(Stock entity, Integer quantidade) {
         var quantidadeProduto = entity.getQuantidadeProduto();
         if (quantidadeProduto < quantidade) {
-            throw new StockNotFoundException("No stock found for this product for this quantity");
+            throw new StockNotFoundException("Estoque encotrado é inferior a quantidade informada para o produto especificado");
         }
     }
 }

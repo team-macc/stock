@@ -8,12 +8,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
@@ -26,7 +26,8 @@ public class SwaggerConfig {
                 //.apis(RequestHandlerSelectors.any())
                 .apis(RequestHandlerSelectors.basePackage("com.teammacc.stock.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(apiInfo());
     }
 
     @Bean
@@ -44,9 +45,14 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("Team MACC", "http://www.teammacc.com", "support@teammacc.com");
-        return new ApiInfo("teammacc API", "Information related to api exposed by teammacc system.", "1.0",
-                "https://www.teammacc.com/termsandconditions", contact, "License of API",
-                "https://www.teammacc.com/privacypolicy", new ArrayList<>());
+        return new ApiInfo(
+                "Stock API",
+                "Information related to api exposed by teammacc system.",
+                "1.0",
+                "https://www.teammacc.com/termsandconditions",
+                new springfox.documentation.service.Contact("Team MACC", "http://www.teammacc.com", "support@teammacc.com"),
+                "License of API",
+                "https://www.teammacc.com/privacypolicy",
+                Collections.emptyList());
     }
 }
