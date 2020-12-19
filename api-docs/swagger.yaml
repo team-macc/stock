@@ -11,16 +11,15 @@ info:
   license:
     name: License of API
     url: 'https://www.teammacc.com/privacypolicy'
-host: 'localhost:8080'
-basePath: /
+host: 'localhost:8087'
 tags:
-  - name: stock-controller
+  - name: Stock
     description: Stock Controller
 paths:
-  '/api/stock/acrescentar/{idProduto}/{quantidade}':
+  '/stock/acrescentar/{idProduto}/{quantidade}':
     put:
       tags:
-        - stock-controller
+        - Stock
       summary: Acrescenta mais a quantidade informada para o estoque do produto informado
       operationId: acrescentarUsingPUT
       consumes:
@@ -57,10 +56,12 @@ paths:
           description: Not Found
         '500':
           description: Foi gerada uma exceção no servidor
-  '/api/stock/atualizar/{idProduto}/{quantidade}':
+      security:
+        - jwtToken: []
+  '/stock/atualizar/{idProduto}/{quantidade}':
     put:
       tags:
-        - stock-controller
+        - Stock
       summary: Salva um novo estoque no valor da quantidade informada para o produto informado
       operationId: cadastrarUsingPUT
       consumes:
@@ -97,10 +98,12 @@ paths:
           description: Not Found
         '500':
           description: Foi gerada uma exceção no servidor
-  '/api/stock/baixar/{idProduto}/{quantidade}':
+      security:
+        - jwtToken: []
+  '/stock/baixar/{idProduto}/{quantidade}':
     put:
       tags:
-        - stock-controller
+        - Stock
       summary: Reduz o estoque do produto informado na quantidade informada
       operationId: baixarUsingPUT
       consumes:
@@ -137,10 +140,12 @@ paths:
           description: Not Found
         '500':
           description: Foi gerada uma exceção no servidor
-  '/api/stock/consultar/{idProduto}':
+      security:
+        - jwtToken: []
+  '/stock/consultar/{idProduto}':
     get:
       tags:
-        - stock-controller
+        - Stock
       summary: Retorna a entidade especificada pelo ID do produto
       operationId: findByIdProdutoUsingGET
       produces:
@@ -169,10 +174,12 @@ paths:
           description: Not Found
         '500':
           description: Foi gerada uma exceção no servidor
-  '/api/stock/verificar/{idProduto}/{quantidade}':
+      security:
+        - jwtToken: []
+  '/stock/verificar/{idProduto}/{quantidade}':
     get:
       tags:
-        - stock-controller
+        - Stock
       summary: 'Verifica se o produto informado possui em estoque, pelo menos, a quantidade informada'
       operationId: verificarUsingGET
       produces:
@@ -205,10 +212,12 @@ paths:
           description: Not Found
         '500':
           description: Foi gerada uma exceção no servidor
-  '/api/stock/{id}':
+      security:
+        - jwtToken: []
+  '/stock/{id}':
     get:
       tags:
-        - stock-controller
+        - Stock
       summary: Retorna a entidade especificada pelo ID
       operationId: findByIdUsingGET
       produces:
@@ -237,6 +246,13 @@ paths:
           description: Not Found
         '500':
           description: Foi gerada uma exceção no servidor
+      security:
+        - jwtToken: []
+securityDefinitions:
+  jwtToken:
+    type: apiKey
+    name: Authorization
+    in: header
 definitions:
   StockVO:
     type: object

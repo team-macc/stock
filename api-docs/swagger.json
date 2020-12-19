@@ -15,19 +15,18 @@
       "url": "https://www.teammacc.com/privacypolicy"
     }
   },
-  "host": "localhost:8080",
-  "basePath": "/",
+  "host": "localhost:8087",
   "tags": [
     {
-      "name": "stock-controller",
+      "name": "Stock",
       "description": "Stock Controller"
     }
   ],
   "paths": {
-    "/api/stock/acrescentar/{idProduto}/{quantidade}": {
+    "/stock/acrescentar/{idProduto}/{quantidade}": {
       "put": {
         "tags": [
-          "stock-controller"
+          "Stock"
         ],
         "summary": "Acrescenta mais a quantidade informada para o estoque do produto informado",
         "operationId": "acrescentarUsingPUT",
@@ -80,13 +79,18 @@
           "500": {
             "description": "Foi gerada uma exceção no servidor"
           }
-        }
+        },
+        "security": [
+          {
+            "jwtToken": []
+          }
+        ]
       }
     },
-    "/api/stock/atualizar/{idProduto}/{quantidade}": {
+    "/stock/atualizar/{idProduto}/{quantidade}": {
       "put": {
         "tags": [
-          "stock-controller"
+          "Stock"
         ],
         "summary": "Salva um novo estoque no valor da quantidade informada para o produto informado",
         "operationId": "cadastrarUsingPUT",
@@ -139,13 +143,18 @@
           "500": {
             "description": "Foi gerada uma exceção no servidor"
           }
-        }
+        },
+        "security": [
+          {
+            "jwtToken": []
+          }
+        ]
       }
     },
-    "/api/stock/baixar/{idProduto}/{quantidade}": {
+    "/stock/baixar/{idProduto}/{quantidade}": {
       "put": {
         "tags": [
-          "stock-controller"
+          "Stock"
         ],
         "summary": "Reduz o estoque do produto informado na quantidade informada",
         "operationId": "baixarUsingPUT",
@@ -198,13 +207,18 @@
           "500": {
             "description": "Foi gerada uma exceção no servidor"
           }
-        }
+        },
+        "security": [
+          {
+            "jwtToken": []
+          }
+        ]
       }
     },
-    "/api/stock/consultar/{idProduto}": {
+    "/stock/consultar/{idProduto}": {
       "get": {
         "tags": [
-          "stock-controller"
+          "Stock"
         ],
         "summary": "Retorna a entidade especificada pelo ID do produto",
         "operationId": "findByIdProdutoUsingGET",
@@ -245,13 +259,18 @@
           "500": {
             "description": "Foi gerada uma exceção no servidor"
           }
-        }
+        },
+        "security": [
+          {
+            "jwtToken": []
+          }
+        ]
       }
     },
-    "/api/stock/verificar/{idProduto}/{quantidade}": {
+    "/stock/verificar/{idProduto}/{quantidade}": {
       "get": {
         "tags": [
-          "stock-controller"
+          "Stock"
         ],
         "summary": "Verifica se o produto informado possui em estoque, pelo menos, a quantidade informada",
         "operationId": "verificarUsingGET",
@@ -298,13 +317,18 @@
           "500": {
             "description": "Foi gerada uma exceção no servidor"
           }
-        }
+        },
+        "security": [
+          {
+            "jwtToken": []
+          }
+        ]
       }
     },
-    "/api/stock/{id}": {
+    "/stock/{id}": {
       "get": {
         "tags": [
-          "stock-controller"
+          "Stock"
         ],
         "summary": "Retorna a entidade especificada pelo ID",
         "operationId": "findByIdUsingGET",
@@ -345,8 +369,20 @@
           "500": {
             "description": "Foi gerada uma exceção no servidor"
           }
-        }
+        },
+        "security": [
+          {
+            "jwtToken": []
+          }
+        ]
       }
+    }
+  },
+  "securityDefinitions": {
+    "jwtToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   },
   "definitions": {

@@ -2,15 +2,13 @@ package com.teammacc.stock.controller;
 
 import com.teammacc.stock.data.vo.StockVO;
 import com.teammacc.stock.service.StockService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/stock")
+@RequestMapping("/")
+@Api( tags = "Stock")
 public class StockController {
 
     private final StockService stockService;
