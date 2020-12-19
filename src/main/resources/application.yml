@@ -1,36 +1,11 @@
-# Descomentar essa parte caso não dê certo a configuração do flyway
-#spring:
-#  application:
-#    name: stock
-#  jpa:
-#    show-sql: false
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#  jmx:
-#    enabled: false
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/stock-db-postgresql?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC
-#    username: postgres
-#    password: Postgres2018!
-
-# Comentar essa parte caso não dê certo a configuração do flyway
 spring:
   application:
     name: stock
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/stock-db-postgresql?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC"
-    username: "postgres"
-    password: "Postgres2018!"
+    url: jdbc:postgresql://104.154.190.156/stock?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC
+    username: macc
+    password: 1234qwer
   jpa:
     show-sql: false
     hibernate:
       ddl-auto: update
-  flyway:
-    url: "jdbc:postgresql://localhost:5432/stock-db-postgresql?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC"
-    user: "postgres"
-    password: "Postgres2018!"
-    enabled: true

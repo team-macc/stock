@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: stock
-        image: samuelpereiradesouza/stock:5
+        image: samuelpereiradesouza/stock:1
         ports:
         - containerPort: 8080
       restartPolicy: Always
