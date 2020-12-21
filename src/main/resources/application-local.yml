@@ -1,0 +1,35 @@
+server:
+  port: 8087
+  servlet:
+    context-path: /stock
+
+spring:
+  application:
+    name: stock
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5432/stock-db-postgresql?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC"
+    username: "postgres"
+    password: "Postgres2018!"
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  flyway:
+    url: "jdbc:postgresql://localhost:5432/stock-db-postgresql?allowPublicKeyRetrieval=true&sslMode=DISABLED&useSSL=false&serverTimezone=UTC"
+    user: "postgres"
+    password: "Postgres2018!"
+    enabled: true
+
+security:
+  jwt:
+    token:
+      secret-key: secretKet
+      expire-length: 60000000000
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: false
+  swagger-ui:
+    enabled: false

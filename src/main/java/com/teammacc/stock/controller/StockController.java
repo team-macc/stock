@@ -1,11 +1,13 @@
 package com.teammacc.stock.controller;
 
 import com.teammacc.stock.data.vo.StockVO;
+import com.teammacc.stock.data.vo.StockVerificationVO;
 import com.teammacc.stock.service.StockService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/")
 @Api( tags = "Stock")
@@ -50,6 +52,20 @@ public class StockController {
     public Boolean verificar(@ApiParam(value = "Número do ID do produto que se deseja verificar estoque") @PathVariable("idProduto") Long idProduto,
 							 @ApiParam(value = "Quantidade do estoque que se deseja verificar a existência") @PathVariable("quantidade") Integer quantidade) {
         return stockService.verificar(idProduto, quantidade);
+    }
+
+    @ApiOperation(value = "Verifica se o produto informado possui em estoque, pelo menos, a quantidade informada")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Indica que o estoque do porduto especificado possui a quantidade especificada"),
+            @ApiResponse(code = 400, message = "Nenhum registro encotrado para o ID especificado"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção no servidor"),
+    })
+    @GetMapping(value = "/v2/verificar/{idProduto}/{quantidade}", produces = {"application/json", "application/xml", "application/x-yaml"})
+    public StockVerificationVO verificarRetornandoJson(@ApiParam(value = "Número do ID do produto que se deseja verificar estoque")
+                                                           @PathVariable("idProduto") Long idProduto,
+                                                       @ApiParam(value = "Quantidade do estoque que se deseja verificar a existência")
+                                                           @PathVariable("quantidade") Integer quantidade) {
+        return stockService.verificarRetornandoJson(idProduto, quantidade);
     }
 
     @ApiOperation(value = "Reduz o estoque do produto informado na quantidade informada")

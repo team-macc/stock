@@ -1,6 +1,7 @@
 package com.teammacc.stock.service;
 
 import com.teammacc.stock.data.vo.StockVO;
+import com.teammacc.stock.data.vo.StockVerificationVO;
 import com.teammacc.stock.entity.Stock;
 import com.teammacc.stock.exception.ResourceNotFoundException;
 import com.teammacc.stock.exception.StockNotFoundException;
@@ -78,5 +79,9 @@ public class StockService {
         if (quantidadeProduto < quantidade) {
             throw new StockNotFoundException("Estoque encotrado é inferior a quantidade informada para o produto especificado");
         }
+    }
+
+    public StockVerificationVO verificarRetornandoJson(Long idProduto, Integer quantidade) {
+        return new StockVerificationVO(idProduto, verificar(idProduto, quantidade));
     }
 }
